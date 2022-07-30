@@ -1,5 +1,8 @@
 global using Microsoft.EntityFrameworkCore;
 global using ShopOnline.Api.Entities;
+global using ShopOnline.Api.Repositories;
+global using ShopOnline.Api.Repositories.Contracts;
+global using ShopOnline.Models.Dtos;
 using Microsoft.Extensions.DependencyInjection;
 using ShopOnline.Api.Data;
 
@@ -15,6 +18,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextPool<ShopOnlineDbContext>(options=>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ShopOnline"))
     );
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
