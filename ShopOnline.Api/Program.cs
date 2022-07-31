@@ -4,7 +4,6 @@ global using ShopOnline.Api.Repositories;
 global using ShopOnline.Api.Repositories.Contracts;
 global using ShopOnline.Models.Dtos;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Net.Http.Headers;
 using ShopOnline.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,8 +29,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors(policy=>policy.WithOrigins("https://localhost:7216", "http://localhost:7216").AllowAnyMethod().WithHeaders(HeaderNames.ContentType));
 
 app.UseHttpsRedirection();
 
