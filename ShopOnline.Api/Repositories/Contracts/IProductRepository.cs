@@ -1,4 +1,6 @@
-﻿namespace ShopOnline.Api.Repositories.Contracts
+﻿using ShopOnline.Api.Entities;
+
+namespace ShopOnline.Api.Repositories.Contracts
 {
     public interface IProductRepository
     {
@@ -8,5 +10,6 @@
         Task<ProductCategory> GetCategory(int id);
 
         Task<IEnumerable<Product>> GetItemsByCategory(int id);
+
     }
 }

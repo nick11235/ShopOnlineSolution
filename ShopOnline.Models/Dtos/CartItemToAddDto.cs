@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ShopOnline.Models.Dtos
 {
-    public class CartItemUpdateQty
+    public class CartItemToAddDto
     {
-        public int CartItemId { get; set; }
+        public int CartId { get; set; }
+        public int ProductId { get; set; }
         public int Qty { get; set; }
     }
 }

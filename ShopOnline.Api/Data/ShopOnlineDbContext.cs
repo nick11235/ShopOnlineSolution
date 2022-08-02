@@ -3,13 +3,14 @@ namespace ShopOnline.Api.Data
 {
     public class ShopOnlineDbContext:DbContext
     {
-        public ShopOnlineDbContext(DbContextOptions<ShopOnlineDbContext> options) : base(options)
-        {
+		public ShopOnlineDbContext(DbContextOptions<ShopOnlineDbContext> options) : base(options)
+		{
 
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
 			//Products
 			//Beauty Category
 			modelBuilder.Entity<Product>().HasData(new Product
@@ -288,29 +289,35 @@ namespace ShopOnline.Api.Data
 			modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
 			{
 				Id = 1,
-				Name = "Beauty"
+				Name = "Beauty",
+				IconCSS = "fa-solid fa-spa"
 			});
 			modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
 			{
 				Id = 2,
-				Name = "Furniture"
+				Name = "Furniture",
+				IconCSS = "fa-solid fa-couch"
 			});
 			modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
 			{
 				Id = 3,
-				Name = "Electronics"
+				Name = "Electronics",
+				IconCSS = "fa-solid fa-laptop-mobile"
 			});
 			modelBuilder.Entity<ProductCategory>().HasData(new ProductCategory
 			{
 				Id = 4,
-				Name = "Shoes"
+				Name = "Shoes",
+				IconCSS = "fa-solid fa-boot"
 			});
+
+
 		}
 
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Product> Products { get; set; }
+		public DbSet<Cart> Carts { get; set; }
+		public DbSet<CartItem> CartItems { get; set; }
+		public DbSet<Product> Products { get; set; }
 		public DbSet<ProductCategory> ProductCategories { get; set; }
-		public DbSet<User> Users { get; set; }
-    }
+        public DbSet<User> Users { get; set; }
+	}
 }

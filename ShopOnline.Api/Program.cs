@@ -4,6 +4,7 @@ global using ShopOnline.Api.Repositories;
 global using ShopOnline.Api.Repositories.Contracts;
 global using ShopOnline.Models.Dtos;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using ShopOnline.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,7 @@ builder.Services.AddDbContextPool<ShopOnlineDbContext>(options=>
     );
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-
+builder.Services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +30,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(policy =>
+    policy.WithOrigins("http://localhost:7216", "https://localhost:7216")
+    .AllowAnyMethod()
+    .WithHeaders(HeaderNames.ContentType)
+);
 
 app.UseHttpsRedirection();
 

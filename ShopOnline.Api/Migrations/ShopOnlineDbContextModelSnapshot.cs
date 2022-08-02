@@ -102,6 +102,8 @@ namespace ShopOnline.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
@@ -345,6 +347,10 @@ namespace ShopOnline.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("IconCSS")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -357,21 +363,25 @@ namespace ShopOnline.Api.Migrations
                         new
                         {
                             Id = 1,
+                            IconCSS = "fa-solid fa-spa",
                             Name = "Beauty"
                         },
                         new
                         {
                             Id = 2,
+                            IconCSS = "fa-solid fa-couch",
                             Name = "Furniture"
                         },
                         new
                         {
                             Id = 3,
+                            IconCSS = "fa-solid fa-laptop-mobile",
                             Name = "Electronics"
                         },
                         new
                         {
                             Id = 4,
+                            IconCSS = "fa-solid fa-boot",
                             Name = "Shoes"
                         });
                 });
@@ -403,6 +413,17 @@ namespace ShopOnline.Api.Migrations
                             Id = 2,
                             UserName = "Sarah"
                         });
+                });
+
+            modelBuilder.Entity("ShopOnline.Api.Entities.Product", b =>
+                {
+                    b.HasOne("ShopOnline.Api.Entities.ProductCategory", "ProductCategory")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductCategory");
                 });
 #pragma warning restore 612, 618
         }
